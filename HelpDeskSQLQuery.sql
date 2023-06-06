@@ -15,6 +15,7 @@ create table Ticket(
 );
 
 create table Bookmark(
+	id int primary key identity(1,1),
 	UserId int foreign key references [User](id),
 	TicketId int foreign key references Ticket(id)
 );

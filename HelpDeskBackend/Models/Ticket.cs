@@ -12,4 +12,6 @@ public partial class Ticket
     public string? Resolution { get; set; }
 
     public bool? IsClosed { get; set; }
+
+    public virtual ICollection<Bookmark> Bookmarks { get; set; } = new List<Bookmark>();
 }

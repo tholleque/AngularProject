@@ -29,17 +29,19 @@ public partial class HelpDeskContext : DbContext
     {
         modelBuilder.Entity<Bookmark>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Bookmark");
+            entity.HasKey(e => e.Id).HasName("PK__Bookmark__3213E83F3A508570");
 
-            entity.HasOne(d => d.Ticket).WithMany()
+            entity.ToTable("Bookmark");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+
+            entity.HasOne(d => d.Ticket).WithMany(p => p.Bookmarks)
                 .HasForeignKey(d => d.TicketId)
-                .HasConstraintName("FK__Bookmark__Ticket__4D94879B");
+                .HasConstraintName("FK__Bookmark__Ticket__5165187F");
 
-            entity.HasOne(d => d.User).WithMany()
+            entity.HasOne(d => d.User).WithMany(p => p.Bookmarks)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Bookmark__UserId__4CA06362");
+                .HasConstraintName("FK__Bookmark__UserId__5070F446");
         });
 
         modelBuilder.Entity<Ticket>(entity =>

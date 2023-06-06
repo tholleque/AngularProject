@@ -5,6 +5,8 @@ namespace HelpDeskBackend.Models;
 
 public partial class Bookmark
 {
+    public int Id { get; set; }
+
     public int? UserId { get; set; }
 
     public int? TicketId { get; set; }
