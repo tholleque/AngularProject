@@ -12,6 +12,7 @@ export class SingleTicketComponent implements OnInit {
   ticket:Ticket = {} as Ticket;
   display:boolean = false;
   constructor(private ticketApi:TicketService){}
+
   
   ngOnInit(): void {
     this.loadTicket();
@@ -25,6 +26,7 @@ export class SingleTicketComponent implements OnInit {
     this.display = !this.display;
   }
 
+ 
   doneEditing(){
     this.ticketApi.updateTicket(this.ticket, this.ticket.id).subscribe(
       () => {
