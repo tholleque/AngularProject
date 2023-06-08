@@ -11,7 +11,7 @@ export class TicketListComponent implements OnInit {
 
   tickets:Ticket [] = [];
   displayTicket:Ticket = {} as Ticket;
-  display:boolean = false;
+  display:boolean[] = [];
 
   constructor(private ticketApi:TicketService){}
 
@@ -23,13 +23,14 @@ export class TicketListComponent implements OnInit {
     this.ticketApi.getAllTickets().subscribe(
       (result) => {
         this.tickets = result;
+        this.display.fill(false, 0, result.length)
       }
     )
   }
 
-  editTicket(t:Ticket, index:number){
+  toggleTicket(t:Ticket, index:number){
     this.ticketApi.displayTicket = t;
-    this.display = !this.display;
+    this.display[index] = !this.display[index];
 
   }
 }
