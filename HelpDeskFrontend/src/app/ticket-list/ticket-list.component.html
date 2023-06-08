@@ -1,12 +1,13 @@
 <div *ngFor="let t of tickets; index as i">
+    <p>#: {{t.id}}</p>
     <p>Issue: {{t.description}}</p>
     
     <p>Closed: {{t.isClosed}}</p>
-    <button *ngIf="!display[i]" (click)="toggleTicket(t, i)">Expand/Edit</button>
-    <button *ngIf="display[i]" (click)="toggleTicket(t, i)">Close</button>
+    <button *ngIf="!display[i]" (click)="toggleTicket(t, i)">See More</button>
+    <button *ngIf="display[i]" (click)="toggleTicket(t, i)">See Less</button>
     <br>
-    <div *ngIf="display[i]"><app-single-ticket></app-single-ticket>
-        
+    <div *ngIf="display[i]">
+        <app-single-ticket></app-single-ticket>  
     </div>
 </div>
 
