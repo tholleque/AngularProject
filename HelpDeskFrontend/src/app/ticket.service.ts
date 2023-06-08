@@ -25,4 +25,8 @@ export class TicketService {
     newValues.id = id;
     return this.http.put<any>(this.url+id, newValues);
   }
+
+  deleteTicket(id:number):Observable<any>{
+    return this.http.delete<any>(this.url+id);
+  }
 }

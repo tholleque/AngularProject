@@ -4,6 +4,8 @@
 //
 //   const ticket = Convert.toTicket(json);
 
+import { Bookmark } from "./bookmark";
+
 export interface Ticket {
     id:          number;
     description: string;

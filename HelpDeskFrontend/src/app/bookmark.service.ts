@@ -15,4 +15,17 @@ export class BookmarkService {
   getAllBookmarks():Observable<Bookmark[]>{
     return this.http.get<Bookmark[]>(this.url);
   }
+  deleteBookmark(id:number){
+    return this.http.delete<any>(this.url+id);
+  }
+
+  getBookmarkByTicket(ticketId:number, bookmarks:Bookmark[]):any{
+    let output:Bookmark[] = [];
+    for(let i = 0; i < bookmarks.length; i++){
+      if(bookmarks[i].ticketId === ticketId){
+        output.push(bookmarks[i]);
+      }
+    }
+    return output;
+  }
 }
