@@ -2,8 +2,11 @@
     <p>Issue: {{t.description}}</p>
     
     <p>Closed: {{t.isClosed}}</p>
-    <button (click)="editTicket(t, i)">Expand/Edit</button>
+    <button *ngIf="!display[i]" (click)="toggleTicket(t, i)">Expand/Edit</button>
+    <button *ngIf="display[i]" (click)="toggleTicket(t, i)">Close</button>
     <br>
-    <div *ngIf="display"><app-single-ticket></app-single-ticket></div>
+    <div *ngIf="display[i]"><app-single-ticket></app-single-ticket>
+        
+    </div>
 </div>
 
