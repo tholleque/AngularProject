@@ -5,6 +5,7 @@
     <p>Closed: {{t.isClosed}}</p>
     <button *ngIf="!display[i]" (click)="toggleTicket(t, i)">See More</button>
     <button *ngIf="display[i]" (click)="toggleTicket(t, i)">See Less</button>
+    <button (click)="deleteTicket(t.id, i)">Delete</button>
     <br>
     <div *ngIf="display[i]">
         <app-single-ticket></app-single-ticket>  
