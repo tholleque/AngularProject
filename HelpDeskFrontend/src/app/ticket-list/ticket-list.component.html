@@ -1,6 +1,9 @@
-<div *ngFor="let t of tickets">
+<div *ngFor="let t of tickets; index as i">
     <p>Issue: {{t.description}}</p>
-    <p>Resolution: {{t.resolution}}</p>
+    
     <p>Closed: {{t.isClosed}}</p>
+    <button (click)="editTicket(t, i)">Expand/Edit</button>
     <br>
+    <div *ngIf="display"><app-single-ticket></app-single-ticket></div>
 </div>
+

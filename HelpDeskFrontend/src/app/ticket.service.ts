@@ -9,9 +9,20 @@ import { Ticket } from './ticket';
 export class TicketService {
 
   url:string = "https://localhost:7094/api/Tickets/";
+  displayTicket:Ticket = {} as Ticket;
+  
   constructor(private http:HttpClient) { }
 
   getAllTickets():Observable<Ticket[]>{
     return this.http.get<Ticket[]>(this.url);
+  }
+
+  getTicketById(id:number):Observable<Ticket>{
+    return this.http.get<Ticket>(this.url+id);
+  }
+
+  updateTicket(newValues:Ticket, id:number){
+    newValues.id = id;
+    return this.http.put<any>(this.url+id, newValues);
   }
 }

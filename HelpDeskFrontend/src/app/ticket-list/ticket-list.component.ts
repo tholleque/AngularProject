@@ -10,14 +10,26 @@ import { Ticket } from '../ticket';
 export class TicketListComponent implements OnInit {
 
   tickets:Ticket [] = [];
+  displayTicket:Ticket = {} as Ticket;
+  display:boolean = false;
 
   constructor(private ticketApi:TicketService){}
 
   ngOnInit(): void {
+    this.loadTickets();
+  }
+
+  loadTickets(){
     this.ticketApi.getAllTickets().subscribe(
       (result) => {
         this.tickets = result;
       }
     )
+  }
+
+  editTicket(t:Ticket, index:number){
+    this.ticketApi.displayTicket = t;
+    this.display = !this.display;
+
   }
 }

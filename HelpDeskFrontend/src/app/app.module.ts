@@ -4,11 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
+import { SingleTicketComponent } from './single-ticket/single-ticket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TicketListComponent
+    TicketListComponent,
+    SingleTicketComponent
   ],
   imports: [
     BrowserModule,
