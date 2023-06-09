@@ -28,4 +28,20 @@ export class BookmarkService {
     }
     return output;
   }
+
+  getBookmarkByUserId(userId:number, bookmarks:Bookmark[]):any{
+    let output:Bookmark[] = [];
+    for(let i = 0; i < bookmarks.length; i++){
+      if(bookmarks[i].userId === userId){
+        output.push(bookmarks[i]);
+      }
+    }
+  }
+
+  createBookmark(userId:number, ticketId:number){
+    let newBookmark:Bookmark = {} as Bookmark;
+    newBookmark.userId = userId;
+    newBookmark.ticketId = ticketId;
+    return this.http.post<any>(this.url, newBookmark);
+  }
 }
