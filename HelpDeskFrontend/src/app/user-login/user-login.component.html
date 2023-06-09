@@ -1,5 +1,6 @@
-<div *ngFor="let u of users">
+<div *ngFor="let u of users, index as i">
     <p>Name: {{u.name}}</p>
+    <button (click)="deleteUser(u.id, i)">Remove User</button>
     <br>
 </div>
 <button (click)="toggleDisplay()">Add New User</button>

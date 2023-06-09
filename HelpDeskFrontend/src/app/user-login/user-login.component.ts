@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UsersService } from '../users.service';
 import { Observable } from 'rxjs';
 import { User } from '../user';
+import { Bookmark } from '../bookmark';
+import { BookmarkService } from '../bookmark.service';
 
 @Component({
   selector: 'app-user-login',
@@ -13,10 +15,11 @@ export class UserLoginComponent implements OnInit {
   users:User[] = [];
   newUser:User = {} as User;
   display:boolean = false;
+  bookmarks:Bookmark[] = [];
 
   @Output() changed: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private userApi:UsersService){}
+  constructor(private userApi:UsersService, private bookmarkApi:BookmarkService){}
   
   ngOnInit(): void {
     return this.loadUsers();
@@ -26,6 +29,12 @@ export class UserLoginComponent implements OnInit {
     this.userApi.getAllUsers().subscribe(
       (result) => {
         this.users = result;
+        this.bookmarkApi.getAllBookmarks().subscribe(
+          (result) => {
+            this.bookmarks = result;
+            this.fillOutBookmarks();
+          }
+        );
       }
     );
   }
@@ -34,6 +43,7 @@ export class UserLoginComponent implements OnInit {
     this.userApi.createUser(newUser).subscribe(
       () => {
         this.users.push(newUser);
+        this.loadUsers();
       }
     )
     
@@ -42,7 +52,34 @@ export class UserLoginComponent implements OnInit {
   toggleDisplay(){
     this.display = !this.display;
   }
-  
 
-  
+  deleteUser(id:number, index:number){
+    if(this.users[index].bookmarks !== undefined || this.users[index].bookmarks.length > 0){
+      let bookmarks1: Bookmark[] = this.users[index].bookmarks;
+
+      if(bookmarks1.length > 0 || this.bookmarks !== undefined){
+        for(let i = 0; i < this.bookmarks.length; i++){
+          this.bookmarkApi.deleteBookmark(bookmarks1[i].id).subscribe(
+            () => {
+              bookmarks1.splice(index, 1);
+            }
+          );
+        }
+      }
+    }
+    this.userApi.deleteUser(id).subscribe(
+      () => {
+        //this.tickets.splice(index, 1);
+        this.loadUsers();
+      }
+    );
+  }
+
+  fillOutBookmarks(){
+    for(let i =0; i < this.users.length; i++){
+      //I pass in the full to do array that way we do not need to call the api every time the loop runs 
+      this.users[i].bookmarks= this.bookmarkApi.getBookmarkByTicket( this.users[i].id, this.bookmarks);
+    }
+  }
+
 }
