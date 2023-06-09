@@ -17,4 +17,8 @@ export class UsersService {
   createUser(newUser:User):Observable<any>{
     return this.http.post<any>(this.url, newUser);
   }
+
+  deleteUser(id:number):Observable<any>{
+    return this.http.delete<any>(this.url+id);
+  }
 }
