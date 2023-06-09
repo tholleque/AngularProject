@@ -26,14 +26,13 @@ export class SingleTicketComponent implements OnInit {
     this.display = !this.display;
   }
 
- 
   doneEditing(){
     this.ticketApi.updateTicket(this.ticket, this.ticket.id).subscribe(
       () => {
         this.toggleDisplay();
         this.ticketApi.displayTicket = this.ticket;
       }
-    )
+    );
   }
 
 }

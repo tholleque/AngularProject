@@ -24,7 +24,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
     return this.loadUsers();
   }
-
+  
   loadUsers(){
     this.userApi.getAllUsers().subscribe(
       (result) => {
@@ -80,6 +80,11 @@ export class UserLoginComponent implements OnInit {
       //I pass in the full to do array that way we do not need to call the api every time the loop runs 
       this.users[i].bookmarks= this.bookmarkApi.getBookmarkByTicket( this.users[i].id, this.bookmarks);
     }
+  }
+
+  selectUser(){
+    let index:number = Number ((document.getElementById("userdropdown") as HTMLInputElement).value);
+    this.userApi.currentUser =this.users[index];
   }
 
 }
