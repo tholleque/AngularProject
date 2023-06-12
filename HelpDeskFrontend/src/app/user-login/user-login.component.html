@@ -22,11 +22,14 @@
   
   <div *ngIf="isLoggedIn">
     <div *ngFor="let t of userTickets">
-     <p>{{t.description}}</p>
-     <p>{{t.resolution}}</p>
+      <div class="card center" style="background-color: rgb(233, 230, 248);">
+       <p>{{t.description}}</p>
+       <p>{{t.resolution}}</p>
+      </div>
+      <br/>
     </div>
  </div>
- 
+
  <div *ngIf="!isLoggedIn">
      <h2>You must be logged in to view bookmarks</h2>
  </div>

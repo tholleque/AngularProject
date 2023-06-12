@@ -28,6 +28,7 @@ export class UserLoginComponent implements OnInit {
   
   ngOnInit(): void {
      this.loadUsers();
+     this.loadUserBookmarks();
      if(this.userApi.currentUser.id !== null){
       this.loadUserBookmarks();
      }
@@ -104,8 +105,8 @@ export class UserLoginComponent implements OnInit {
     let index:number = Number ((document.getElementById("userdropdown") as HTMLInputElement).value);
 
     this.userApi.currentUser = this.users[index];
-    this.route.url
-    console.log(this.users[index].id)
+    this.route.url;
+    console.log(this.users[index].id);
     this.loadUserBookmarks();
     
   }
