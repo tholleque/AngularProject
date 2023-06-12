@@ -17,7 +17,6 @@ export class TicketListComponent implements OnInit {
   display: boolean[] = [];
 
 
-  
   constructor(private ticketApi:TicketService, private bookmarkApi:BookmarkService, private userApi:UsersService){}
 
 
@@ -41,6 +40,10 @@ export class TicketListComponent implements OnInit {
   }
 
   onTicketAdded() {
+    //Method is called when a new ticket is added
+    //Invokes the loadTickets method to reload the list of tickets
+    //By calling loadTickets it starts the process of retrieving the updated list of tickets from the server and updates the local tickets array
+    //TLDR refreshes the list of ticket when a new ticket is added
     this.loadTickets();
   }
 
