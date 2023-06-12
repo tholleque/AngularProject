@@ -8,5 +8,7 @@
         <input type="checkbox" [(ngModel)]="ticket.isClosed">
         <button (click)="doneEditing()">Save Changes</button>
     </div>
-   
+   <div>
+    <button (click)="addBookmark(currentUser.id, ticket.id)">Add to Bookmarks </button>
+   </div>
 </div>

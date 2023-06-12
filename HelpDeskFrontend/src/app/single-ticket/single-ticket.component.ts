@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketService } from '../ticket.service';
 import { Ticket } from '../ticket';
+import { UsersService } from '../users.service';
+import { BookmarkService } from '../bookmark.service';
+import { Bookmark } from '../bookmark';
+import { User } from '../user';
 
 @Component({
   selector: 'app-single-ticket',
@@ -9,9 +13,13 @@ import { Ticket } from '../ticket';
 })
 export class SingleTicketComponent implements OnInit {
 
+  @Input() bookmark: Bookmark = {} as Bookmark;
+  @Output() changed = new EventEmitter<Bookmark>();
   ticket:Ticket = {} as Ticket;
   display:boolean = false;
-  constructor(private ticketApi:TicketService){}
+  currentUser:User = {} as User; 
+  
+  constructor(private ticketApi:TicketService, private userApi:UsersService, private bookmarkApi:BookmarkService){}
 
   
   ngOnInit(): void {
@@ -36,4 +44,16 @@ export class SingleTicketComponent implements OnInit {
     )
   }
 
+  addBookmark(userId:number, ticketId:number){
+    this.bookmark.userId = userId;
+    this.bookmark.ticketId = ticketId;
+    this.bookmarkApi.createBookmark(this.bookmark.userId, this.bookmark.ticketId).subscribe(
+      () => {
+        this.changed.emit(this.bookmark);
+      }
+    )
+  }
+
+  
+  
 }

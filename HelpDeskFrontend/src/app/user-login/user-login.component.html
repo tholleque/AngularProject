@@ -1,11 +1,30 @@
-<div *ngFor="let u of users, index as i">
+<!-- <div *ngFor="let u of users, index as i">
     <p>Name: {{u.name}}</p>
     <button (click)="deleteUser(u.id, i)">Remove User</button>
     <br>
-</div>
+</div> -->
 <button (click)="toggleDisplay()">Add New User</button>
 <div *ngIf="display">
     <p>Name:</p>
     <input type="text" [(ngModel)]="newUser.name">
     <button (click)="addUser(newUser); toggleDisplay()">Sumbit</button>
 </div>
+
+
+<select id="userdropdown" >
+    <option *ngFor="let u of users; index as i" value="{{i}}">
+      {{u.name}}
+    </option>
+  </select>
+  <button (click)="selectUser(); loggedInCheck()">Login</button>
+  
+  <div *ngIf="isLoggedIn">
+    <div *ngFor="let b of bookmarks">
+     <p>{{b.ticket}}</p>
+    </div>
+ </div>
+ 
+ <div *ngIf="!isLoggedIn">
+     <h2>You must be logged in to view bookmarks</h2>
+ </div>
+ 

@@ -9,6 +9,7 @@ import { Bookmark } from './bookmark';
 })
 export class BookmarkService {
 
+  
   url:string = "https://localhost:7094/api/Bookmarks/";
   constructor(private http:HttpClient) { }
 

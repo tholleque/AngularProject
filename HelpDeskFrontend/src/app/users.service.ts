@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class UsersService {
 
   url:string = "https://localhost:7094/api/Users/";
+  currentUser:User = {} as User;
   constructor(private http:HttpClient) { }
 
   getAllUsers():Observable<User[]>{
