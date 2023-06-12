@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HelpDeskBackend.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace HelpDeskBackend.Controllers
 {
@@ -99,6 +101,8 @@ namespace HelpDeskBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(int id)
         {
+            List<Bookmark> bookmarks = await _context.Bookmarks.Where(bookmark => bookmark.TicketId == id).ToListAsync();
+            _context.Bookmarks.RemoveRange(bookmarks);
             if (_context.Tickets == null)
             {
                 return NotFound();
