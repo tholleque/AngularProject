@@ -3,12 +3,14 @@
     <p>Resolution: {{ticket.resolution}}</p>
     <button (click)="toggleDisplay()" *ngIf="!ticket.isClosed">Edit Resolution</button>
     <div *ngIf="display">
-        <input type="text" [(ngModel)]="ticket.resolution">
-        <p>Close ticket</p>
-        <input type="checkbox" [(ngModel)]="ticket.isClosed">
+        <input type="text" [(ngModel)]="ticket.resolution" class="center">
+        <div class="checkbox">
+            <p>Close ticket</p>
+            <input type="checkbox" [(ngModel)]="ticket.isClosed">
+        </div>
         <button (click)="doneEditing()">Save Changes</button>
     </div>
-   <div>
-    <button (click)="addBookmark(currentUser.id, ticket.id)">Add to Bookmarks </button>
-   </div>
+    <div>
+        <button (click)="addBookmark(currentUser.id, ticket.id)">Add to Bookmarks </button>
+    </div>
 </div>
