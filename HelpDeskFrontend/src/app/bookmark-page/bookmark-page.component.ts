@@ -31,7 +31,7 @@ export class BookmarkPageComponent implements OnInit {
     }
   }
   loadUserBookmarks(){
-    this.bookmarkApi.getBookmarkByUserId(this.userApi.currentUser.id, this.userBookmarks).subscribe(
+    this.bookmarkApi.getBookmarkByUserId(this.userApi.currentUser.id).subscribe(
       (result: Bookmark[]) => {
         this.userBookmarks = result;
       }

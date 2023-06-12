@@ -5,6 +5,7 @@ import { UsersService } from '../users.service';
 import { BookmarkService } from '../bookmark.service';
 import { Bookmark } from '../bookmark';
 import { User } from '../user';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-ticket',
@@ -14,16 +15,21 @@ import { User } from '../user';
 export class SingleTicketComponent implements OnInit {
 
   @Input() bookmark: Bookmark = {} as Bookmark;
+
   @Output() changed = new EventEmitter<Bookmark>();
   ticket:Ticket = {} as Ticket;
   display:boolean = false;
   currentUser:User = {} as User; 
-  
-  constructor(private ticketApi:TicketService, private userApi:UsersService, private bookmarkApi:BookmarkService){}
+  currentUserId :number = 0; 
+  constructor(private route: Router, private ticketApi:TicketService, private userApi:UsersService, private bookmarkApi:BookmarkService){}
+
 
   
   ngOnInit(): void {
     this.loadTicket();
+    this.currentUserId = this.userApi.currentUser.id;
+    // const routeParams = this.route.snapshot.paramMap;
+    // let userId = Number(routeParams.get('userId'));
   }
 
   loadTicket(){
@@ -46,9 +52,9 @@ export class SingleTicketComponent implements OnInit {
   addBookmark(userId:number, ticketId:number){
     this.bookmark.userId = userId;
     this.bookmark.ticketId = ticketId;
-    this.bookmarkApi.createBookmark(this.bookmark.userId, this.bookmark.ticketId).subscribe(
-      () => {
-        this.changed.emit(this.bookmark);
+    this.bookmarkApi.createBookmark(this.currentUserId, this.bookmark.ticketId).subscribe(
+      (result) => {
+        this.route.navigateByUrl('/bookmarks')
       }
     )
   }
