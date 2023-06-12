@@ -31,6 +31,7 @@ export class TicketService {
   }
 
   addTicket(newTicket: Ticket): Observable<any> {
+    //Sends an HTTP POST request to the URL with new ticket object as the request body
     return this.http.post<any>(this.url, newTicket);
   }
 }

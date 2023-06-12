@@ -14,10 +14,15 @@ export class AddTicketComponent {
   constructor(private ticketService: TicketService) {}
 
   addTicket(newTicket: Ticket) {
+    // Sets the isClosed property of the new ticket to 'false'
     newTicket.isClosed = false;
+    // Calls the addTicket method of the ticket service and subscribes to the result
     this.ticketService.addTicket(newTicket).subscribe(() => {
-      this.ticketAdded.emit(); // Emit the event when a new ticket is added
+      // Emits the ticketAdded event when a new ticket is added
+      this.ticketAdded.emit();
+      // Resets the newTicket object to an empty ticket
       this.newTicket = {} as Ticket;
     });
   }
+  
 }
