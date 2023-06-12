@@ -14,7 +14,7 @@ export class BookmarkService {
   constructor(private http:HttpClient) { }
 
   getAllBookmarks():Observable<Bookmark[]>{
-    return this.http.get<Bookmark[]>(this.url);
+    return this.http.get<Bookmark[]>("https://localhost:7094/api/Bookmarks");
   }
   deleteBookmark(id:number){
     return this.http.delete<any>(this.url+id);
@@ -30,13 +30,8 @@ export class BookmarkService {
     return output;
   }
 
-  getBookmarkByUserId(userId:number, bookmarks:Bookmark[]):any{
-    let output:Bookmark[] = [];
-    for(let i = 0; i < bookmarks.length; i++){
-      if(bookmarks[i].userId === userId){
-        output.push(bookmarks[i]);
-      }
-    }
+  getBookmarkByUserId(userId:number):any{
+    return this.http.get<any>(this.url + "User/" + userId)
   }
 
   createBookmark(userId:number, ticketId:number){

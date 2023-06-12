@@ -18,11 +18,12 @@
     </option>
   </select>
 
-  <button (click)="selectUser(); loggedInCheck()">Login</button>
+  <button (click)="selectUser(); loggedInCheck(); ">Login</button>
   
   <div *ngIf="isLoggedIn">
-    <div *ngFor="let b of bookmarks">
-     <p>{{b.ticket}}</p>
+    <div *ngFor="let t of userTickets">
+     <p>{{t.description}}</p>
+     <p>{{t.resolution}}</p>
     </div>
  </div>
  

@@ -5,6 +5,8 @@ import { User } from '../user';
 import { Bookmark } from '../bookmark';
 import { BookmarkService } from '../bookmark.service';
 import { TicketService } from '../ticket.service';
+import { ActivatedRoute } from '@angular/router';
+import { Ticket } from '../ticket';
 
 @Component({
   selector: 'app-user-login',
@@ -18,22 +20,27 @@ export class UserLoginComponent implements OnInit {
   display:boolean = false;
   bookmarks:Bookmark[] = [];
   isLoggedIn:boolean = false;
+  userTickets:Ticket[] = [];
 
   @Output() changed: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private userApi:UsersService, private bookmarkApi:BookmarkService, private ticketApi:TicketService){}
+  constructor(private route: ActivatedRoute, private userApi:UsersService, private bookmarkApi:BookmarkService, private ticketApi:TicketService){}
   
   ngOnInit(): void {
-    return this.loadUsers();
-    return this.loadUserBookmarks();
+     this.loadUsers();
+     if(this.userApi.currentUser.id !== null){
+      this.loadUserBookmarks();
+     }
   }
 
   loadUserBookmarks(){
-    this.bookmarkApi.getBookmarkByUserId(this.userApi.currentUser.id, this.bookmarks).subscribe(
-      (result: Bookmark[]) => {
-        this.bookmarks = result;
+    this.bookmarkApi.getBookmarkByUserId(this.userApi.currentUser.id).subscribe(
+      (result: Ticket[]) => {
+        this.userTickets = result;
+        console.log(result);
       }
     )
+    
   }
   
   loadUsers(){
@@ -97,7 +104,10 @@ export class UserLoginComponent implements OnInit {
     let index:number = Number ((document.getElementById("userdropdown") as HTMLInputElement).value);
 
     this.userApi.currentUser = this.users[index];
+    this.route.url
     console.log(this.users[index].id)
+    this.loadUserBookmarks();
+    
   }
   
   loggedInCheck(){
@@ -108,7 +118,9 @@ export class UserLoginComponent implements OnInit {
     
   }
 
+
     
   }
+
 
 
