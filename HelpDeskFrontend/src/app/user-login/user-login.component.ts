@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../user';
 import { Bookmark } from '../bookmark';
 import { BookmarkService } from '../bookmark.service';
+import { TicketService } from '../ticket.service';
 
 @Component({
   selector: 'app-user-login',
@@ -16,13 +17,23 @@ export class UserLoginComponent implements OnInit {
   newUser:User = {} as User;
   display:boolean = false;
   bookmarks:Bookmark[] = [];
+  isLoggedIn:boolean = false;
 
   @Output() changed: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private userApi:UsersService, private bookmarkApi:BookmarkService){}
+  constructor(private userApi:UsersService, private bookmarkApi:BookmarkService, private ticketApi:TicketService){}
   
   ngOnInit(): void {
     return this.loadUsers();
+    return this.loadUserBookmarks();
+  }
+
+  loadUserBookmarks(){
+    this.bookmarkApi.getBookmarkByUserId(this.userApi.currentUser.id, this.bookmarks).subscribe(
+      (result: Bookmark[]) => {
+        this.bookmarks = result;
+      }
+    )
   }
   
   loadUsers(){
@@ -84,7 +95,20 @@ export class UserLoginComponent implements OnInit {
 
   selectUser(){
     let index:number = Number ((document.getElementById("userdropdown") as HTMLInputElement).value);
+
+    this.userApi.currentUser = this.users[index];
+    console.log(this.users[index].id)
+  }
+  
+  loggedInCheck(){
+    let index:number = Number ((document.getElementById("userdropdown") as HTMLInputElement).value);
+    if(this.users[index].id !== null){
+      this.isLoggedIn = true;
+    }
+    
+  }
+
     this.userApi.currentUser =this.users[index];
   }
 
-}
+

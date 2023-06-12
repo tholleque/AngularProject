@@ -3,6 +3,7 @@ import { TicketService } from '../ticket.service';
 import { Ticket } from '../ticket';
 import { Bookmark } from '../bookmark';
 import { BookmarkService } from '../bookmark.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-ticket-list',
@@ -15,7 +16,14 @@ export class TicketListComponent implements OnInit {
   bookmarks: Bookmark[] = [];
   display: boolean[] = [];
 
-  constructor(private ticketApi: TicketService, private bookmarkApi: BookmarkService) {}
+
+  tickets:Ticket [] = [];
+  displayTicket:Ticket = {} as Ticket;
+  bookmarks:Bookmark[] = [];
+  display:boolean[] = [];
+
+  constructor(private ticketApi:TicketService, private bookmarkApi:BookmarkService, private userApi:UsersService){}
+
 
   ngOnInit(): void {
     this.loadTickets();

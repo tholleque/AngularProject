@@ -9,9 +9,11 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BookmarkPageComponent } from './bookmark-page/bookmark-page.component';
 import { AddTicketComponent } from './add-ticket/add-ticket.component';
+
 const appRoutes: Routes = [
   {path:'userLogin',component:UserLoginComponent},
-  {path:'ticketPage', component:TicketListComponent}
+  {path:'ticketPage', component:TicketListComponent},
+  {path:'bookmarks', component:BookmarkPageComponent}
 ]
 
 @NgModule({
@@ -22,6 +24,7 @@ const appRoutes: Routes = [
     UserLoginComponent,
     BookmarkPageComponent,
     AddTicketComponent
+
   ],
   imports: [
     BrowserModule,

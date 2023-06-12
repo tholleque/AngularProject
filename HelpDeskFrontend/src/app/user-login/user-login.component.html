@@ -10,9 +10,24 @@
     <button (click)="addUser(newUser); toggleDisplay()">Sumbit</button>
 </div>
 
+
+
 <select id="userdropdown" >
     <option *ngFor="let u of users; index as i" value="{{i}}">
       {{u.name}}
     </option>
   </select>
-  <button (click)="selectUser()">Login</button>
+
+  <button (click)="selectUser(); loggedInCheck()">Login</button>
+  
+  <div *ngIf="isLoggedIn">
+    <div *ngFor="let b of bookmarks">
+     <p>{{b.ticket}}</p>
+    </div>
+ </div>
+ 
+ <div *ngIf="!isLoggedIn">
+     <h2>You must be logged in to view bookmarks</h2>
+ </div>
+ 
+

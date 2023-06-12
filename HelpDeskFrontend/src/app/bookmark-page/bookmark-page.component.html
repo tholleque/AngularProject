@@ -1,1 +1,11 @@
-<p>bookmark-page works!</p>
+
+<div *ngIf="isLoggedIn">
+   <div *ngFor="let b of userBookmarks">
+    <p>{{b.ticket}}</p>
+   </div>
+</div>
+
+<div *ngIf="!isLoggedIn">
+    <h2>You must be logged in to view bookmarks</h2>
+</div>
+=======
