@@ -35,7 +35,7 @@ export class UserLoginComponent implements OnInit {
       }
     )
   }
-
+  
   loadUsers(){
     this.userApi.getAllUsers().subscribe(
       (result) => {
@@ -95,6 +95,7 @@ export class UserLoginComponent implements OnInit {
 
   selectUser(){
     let index:number = Number ((document.getElementById("userdropdown") as HTMLInputElement).value);
+
     this.userApi.currentUser = this.users[index];
     console.log(this.users[index].id)
   }
@@ -106,4 +107,8 @@ export class UserLoginComponent implements OnInit {
     }
     
   }
-}
+
+    this.userApi.currentUser =this.users[index];
+  }
+
+
