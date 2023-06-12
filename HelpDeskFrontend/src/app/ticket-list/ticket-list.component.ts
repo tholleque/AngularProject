@@ -50,17 +50,17 @@ export class TicketListComponent implements OnInit {
   }
 
   deleteTicket(id: number, index: number) {
-    if (this.tickets[index].bookmarks !== undefined || this.tickets[index].bookmarks.length > 0) {
-      let bookmarks1: Bookmark[] = this.tickets[index].bookmarks;
+    // if (this.tickets[index].bookmarks !== undefined || this.tickets[index].bookmarks.length > 0) {
+    //   let bookmarks1: Bookmark[] = this.tickets[index].bookmarks;
 
-      if (bookmarks1.length > 0 || this.bookmarks !== undefined) {
-        for (let i = 0; i < this.bookmarks.length; i++) {
-          this.bookmarkApi.deleteBookmark(bookmarks1[i].id).subscribe(() => {
-            bookmarks1.splice(index, 1);
-          });
-        }
-      }
-    }
+    //   if (bookmarks1.length > 0 || this.bookmarks !== undefined) {
+    //     for (let i = 0; i < this.bookmarks.length; i++) {
+    //       this.bookmarkApi.deleteBookmark(bookmarks1[i].id).subscribe(() => {
+    //         bookmarks1.splice(index, 1);
+    //       });
+    //     }
+    //   }
+    // }
 
     this.ticketApi.deleteTicket(id).subscribe(() => {
       this.loadTickets();
