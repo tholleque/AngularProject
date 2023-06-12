@@ -8,6 +8,7 @@ import { SingleTicketComponent } from './single-ticket/single-ticket.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BookmarkPageComponent } from './bookmark-page/bookmark-page.component';
+import { AddTicketComponent } from './add-ticket/add-ticket.component';
 const appRoutes: Routes = [
   {path:'userLogin',component:UserLoginComponent},
   {path:'ticketPage', component:TicketListComponent}
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
     TicketListComponent,
     SingleTicketComponent,
     UserLoginComponent,
-    BookmarkPageComponent
+    BookmarkPageComponent,
+    AddTicketComponent
   ],
   imports: [
     BrowserModule,

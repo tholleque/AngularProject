@@ -29,4 +29,8 @@ export class TicketService {
   deleteTicket(id:number):Observable<any>{
     return this.http.delete<any>(this.url+id);
   }
+
+  addTicket(newTicket: Ticket): Observable<any> {
+    return this.http.post<any>(this.url, newTicket);
+  }
 }

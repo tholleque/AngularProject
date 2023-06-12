@@ -10,23 +10,22 @@ import { BookmarkService } from '../bookmark.service';
   styleUrls: ['./ticket-list.component.css']
 })
 export class TicketListComponent implements OnInit {
+  tickets: Ticket[] = [];
+  displayTicket: Ticket = {} as Ticket;
+  bookmarks: Bookmark[] = [];
+  display: boolean[] = [];
 
-  tickets:Ticket [] = [];
-  displayTicket:Ticket = {} as Ticket;
-  bookmarks:Bookmark[] = [];
-  display:boolean[] = [];
-
-  constructor(private ticketApi:TicketService, private bookmarkApi:BookmarkService){}
+  constructor(private ticketApi: TicketService, private bookmarkApi: BookmarkService) {}
 
   ngOnInit(): void {
     this.loadTickets();
   }
 
-  loadTickets(){
+  loadTickets() {
     this.ticketApi.getAllTickets().subscribe(
       (result) => {
         this.tickets = result;
-        this.display.fill(false, 0, result.length)
+        this.display.fill(false, 0, result.length);
         this.bookmarkApi.getAllBookmarks().subscribe(
           (result) => {
             this.bookmarks = result;
@@ -37,40 +36,36 @@ export class TicketListComponent implements OnInit {
     );
   }
 
-  toggleTicket(t:Ticket, index:number){
-    this.ticketApi.displayTicket = t;
-    this.display[index] = !this.display[index];
-
+  onTicketAdded() {
+    this.loadTickets();
   }
 
-  deleteTicket(id:number, index:number){
-    if(this.tickets[index].bookmarks !== undefined || this.tickets[index].bookmarks.length > 0){
+  toggleTicket(t: Ticket, index: number) {
+    this.ticketApi.displayTicket = t;
+    this.display[index] = !this.display[index];
+  }
+
+  deleteTicket(id: number, index: number) {
+    if (this.tickets[index].bookmarks !== undefined || this.tickets[index].bookmarks.length > 0) {
       let bookmarks1: Bookmark[] = this.tickets[index].bookmarks;
 
-      if(bookmarks1.length > 0 || this.bookmarks !== undefined){
-        for(let i = 0; i < this.bookmarks.length; i++){
-          this.bookmarkApi.deleteBookmark(bookmarks1[i].id).subscribe(
-            () => {
-              bookmarks1.splice(index, 1);
-            }
-          );
+      if (bookmarks1.length > 0 || this.bookmarks !== undefined) {
+        for (let i = 0; i < this.bookmarks.length; i++) {
+          this.bookmarkApi.deleteBookmark(bookmarks1[i].id).subscribe(() => {
+            bookmarks1.splice(index, 1);
+          });
         }
       }
     }
-    
-        
-    this.ticketApi.deleteTicket(id).subscribe(
-      () => {
-        //this.tickets.splice(index, 1);
-        this.loadTickets();
-      }
-    );
+
+    this.ticketApi.deleteTicket(id).subscribe(() => {
+      this.loadTickets();
+    });
   }
 
-  fillOutBookmarks(){
-    for(let i =0; i < this.tickets.length; i++){
-      //I pass in the full to do array that way we do not need to call the api every time the loop runs 
-      this.tickets[i].bookmarks= this.bookmarkApi.getBookmarkByTicket( this.tickets[i].id, this.bookmarks);
+  fillOutBookmarks() {
+    for (let i = 0; i < this.tickets.length; i++) {
+      this.tickets[i].bookmarks = this.bookmarkApi.getBookmarkByTicket(this.tickets[i].id, this.bookmarks);
     }
   }
 }

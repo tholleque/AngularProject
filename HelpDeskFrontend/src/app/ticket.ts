@@ -12,6 +12,7 @@ export interface Ticket {
     resolution:  string;
     isClosed:    boolean;
     bookmarks:   any[];
+    title:       string;
 }
 
 // Converts JSON strings to/from your types
