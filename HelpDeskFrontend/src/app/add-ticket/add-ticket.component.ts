@@ -14,6 +14,7 @@ export class AddTicketComponent {
   constructor(private ticketService: TicketService) {}
 
   addTicket(newTicket: Ticket) {
+    newTicket.isClosed = false;
     this.ticketService.addTicket(newTicket).subscribe(() => {
       this.ticketAdded.emit(); // Emit the event when a new ticket is added
       this.newTicket = {} as Ticket;
