@@ -108,7 +108,7 @@ export class UserLoginComponent implements OnInit {
     
   }
 
-    this.userApi.currentUser =this.users[index];
+    
   }
 
 

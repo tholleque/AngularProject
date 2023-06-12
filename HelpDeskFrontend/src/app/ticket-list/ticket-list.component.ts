@@ -16,12 +16,6 @@ export class TicketListComponent implements OnInit {
   bookmarks: Bookmark[] = [];
   display: boolean[] = [];
 
-
-  tickets:Ticket [] = [];
-  displayTicket:Ticket = {} as Ticket;
-  bookmarks:Bookmark[] = [];
-  display:boolean[] = [];
-
   constructor(private ticketApi:TicketService, private bookmarkApi:BookmarkService, private userApi:UsersService){}
 
 
