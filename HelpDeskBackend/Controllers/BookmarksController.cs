@@ -119,5 +119,27 @@ namespace HelpDeskBackend.Controllers
         {
             return (_context.Bookmarks?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        [HttpGet("User/{userId}")]
+        public async Task<ActionResult<List<Ticket>>> GetUserBookmarks(int userId)
+        {
+            
+            if (_context.Bookmarks == null)
+            {
+                return NotFound();
+            }
+            List<Bookmark> userBookmarks = await _context.Bookmarks.Where(b => userId == b.UserId).ToListAsync();
+
+            if (userBookmarks.Count() == 0)
+            {
+                return NotFound();
+            }
+            List<int> ids = userBookmarks.Select(b => b.TicketId).ToList();
+            List<Ticket> userTickets = await _context.Tickets.Where(t => ids.Contains(t.Id)).ToListAsync();
+            return userTickets;
+        }
     }
+
+
+
 }

@@ -54,7 +54,7 @@ export class SingleTicketComponent implements OnInit {
     this.bookmark.ticketId = ticketId;
     this.bookmarkApi.createBookmark(this.currentUserId, this.bookmark.ticketId).subscribe(
       (result) => {
-        this.route.navigateByUrl('/bookmarks')
+        // this.route.navigateByUrl('/bookmarks')
       }
     )
   }
