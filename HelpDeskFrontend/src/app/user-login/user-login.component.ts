@@ -116,7 +116,6 @@ export class UserLoginComponent implements OnInit {
     if(this.users[index].id !== null){
       this.isLoggedIn = true;
     }
-    
   }
 
 

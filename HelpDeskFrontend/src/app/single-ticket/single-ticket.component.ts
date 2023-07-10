@@ -21,9 +21,10 @@ export class SingleTicketComponent implements OnInit {
   display:boolean = false;
   currentUser:User = {} as User; 
   currentUserId :number = 0; 
+  isLoggedIn: boolean = false; 
   constructor(private route: Router, private ticketApi:TicketService, private userApi:UsersService, private bookmarkApi:BookmarkService){}
 
-
+  
   
   ngOnInit(): void {
     this.loadTicket();
@@ -32,6 +33,11 @@ export class SingleTicketComponent implements OnInit {
     // let userId = Number(routeParams.get('userId'));
   }
 
+  LoginCheck(){
+    if(this.currentUserId !== null){
+      this.isLoggedIn = true; 
+    }
+  }
   loadTicket(){
     this.ticket = this.ticketApi.displayTicket;
   }

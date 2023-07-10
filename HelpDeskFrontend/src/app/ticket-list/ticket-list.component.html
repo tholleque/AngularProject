@@ -1,5 +1,8 @@
+<div class="card center">
+  <app-add-ticket (ticketAdded)="onTicketAdded()"></app-add-ticket>
+</div>
 <div *ngFor="let t of tickets; index as i">
-  <div class="card center" style="background-color: rgb(233, 230, 248);">
+  <div class="card center">
     <div class="row">
       <p>#: {{t.id}}</p>
       <p *ngIf="!t.isClosed" style="text-align: right;">Status: <span style="color: red;">Open</span></p>
@@ -9,8 +12,8 @@
       <p class="center">Issue: {{t.description}}</p>
     </div>
     <div class="center">
-      <button *ngIf="!display[i]" (click)="toggleTicket(t, i)">See More</button>
-      <button *ngIf="display[i]" (click)="toggleTicket(t, i)">See Less</button>
+      <button *ngIf="!display[i]" (click)="toggleTicket(t, i)">Show More</button>
+      <button *ngIf="display[i]" (click)="toggleTicket(t, i)">Show Less</button>
       <br/>
       <div *ngIf="display[i]">
         <app-single-ticket></app-single-ticket>  
@@ -20,7 +23,4 @@
     </div>
   </div>
   <br/>
-</div>
-<div class="card center" style="background-color: rgb(233, 230, 248);">
-  <app-add-ticket (ticketAdded)="onTicketAdded()"></app-add-ticket>
 </div>

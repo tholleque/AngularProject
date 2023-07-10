@@ -40,10 +40,6 @@ export class TicketListComponent implements OnInit {
   }
 
   onTicketAdded() {
-    //Method is called when a new ticket is added
-    //Invokes the loadTickets method to reload the list of tickets
-    //By calling loadTickets it starts the process of retrieving the updated list of tickets from the server and updates the local tickets array
-    //TLDR refreshes the list of ticket when a new ticket is added
     this.loadTickets();
   }
 
@@ -53,18 +49,6 @@ export class TicketListComponent implements OnInit {
   }
 
   deleteTicket(id: number, index: number) {
-    // if (this.tickets[index].bookmarks !== undefined || this.tickets[index].bookmarks.length > 0) {
-    //   let bookmarks1: Bookmark[] = this.tickets[index].bookmarks;
-
-    //   if (bookmarks1.length > 0 || this.bookmarks !== undefined) {
-    //     for (let i = 0; i < this.bookmarks.length; i++) {
-    //       this.bookmarkApi.deleteBookmark(bookmarks1[i].id).subscribe(() => {
-    //         bookmarks1.splice(index, 1);
-    //       });
-    //     }
-    //   }
-    // }
-
     this.ticketApi.deleteTicket(id).subscribe(() => {
       this.loadTickets();
     });
